@@ -22,7 +22,6 @@ use LazyJsonMapper\LazyJsonMapper;
  * @method int getFollowingTagCount()
  * @method string getBiography()
  * @method string getExternalUrl()
- *
  * @author Rakita Miljan <miljan@flocksocial.io>
  */
 class User extends LazyJsonMapper
