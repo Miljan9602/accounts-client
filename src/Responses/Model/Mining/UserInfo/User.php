@@ -10,7 +10,7 @@ use LazyJsonMapper\LazyJsonMapper;
  * @method string getPk()
  * @method string getUsername()
  * @method string getFullName()
- * @method bool IsIsPrivate()
+ * @method bool isIsPrivate()
  * @method string getProfilePicUrl()
  * @method string getProfilePicId()
  * @method bool isIsVerified()
