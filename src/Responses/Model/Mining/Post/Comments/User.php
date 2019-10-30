@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Miljan9602\AccountsClient\Responses\Model\Mining\Followers;
+namespace Miljan9602\AccountsClient\Responses\Model\Mining\Post\Comments;
 
 use LazyJsonMapper\LazyJsonMapper;
 
@@ -11,14 +11,11 @@ use LazyJsonMapper\LazyJsonMapper;
  * @method string getPk()
  * @method string getUsername()
  * @method string getFullName()
- * @method bool IsIsPrivate()
- * @method string getProfilePicUrl()
+ * @method bool isIsPrivate()
  * @method string getProfilePicId()
- * @method bool isIsVerified()
- * @method bool isHasAnonymousProfilePicture()
- * @method int getMediaCount()
+ * @method string getProfilePicUrl()
  *
- * @package AccountsClient\Responses\Model\Mining\Followers
+ * @package AccountsClient\Responses\Model\Mining\Location\Feed
  * @author Rakita Miljan <miljan@flocksocial.io>
  */
 class User extends LazyJsonMapper
@@ -28,10 +25,7 @@ class User extends LazyJsonMapper
         'username' => 'string',
         'full_name' => 'string',
         'is_private' => 'bool',
-        'profile_pic_url' => 'string',
         'profile_pic_id' => 'string',
-        'is_verified' => 'bool',
-        'has_anonymous_profile_picture' => 'bool',
-        'media_count' => 'int',
+        'profile_pic_url' => 'string'
     ];
 }

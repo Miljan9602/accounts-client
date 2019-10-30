@@ -1,8 +1,8 @@
 <?php
 
-namespace AccountsClient\Requests;
+namespace Miljan9602\AccountsClient\Requests;
 
-use AccountsClient\Exceptions\AccountsException;
+use Miljan9602\AccountsClient\Exceptions\AccountsException;
 
 /**
  * Interface BaseRequestInterface

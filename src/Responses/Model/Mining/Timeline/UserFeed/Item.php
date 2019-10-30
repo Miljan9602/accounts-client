@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AccountsClient\Responses\Model\Mining\Timeline\UserFeed;
+namespace Miljan9602\AccountsClient\Responses\Model\Mining\Timeline\UserFeed;
 
 use LazyJsonMapper\LazyJsonMapper;
 
@@ -17,6 +17,7 @@ use LazyJsonMapper\LazyJsonMapper;
  * @method int getOriginalWidth()
  * @method int getOriginalHeight()
  * @method User getUser()
+ * @method ImageVersion getImageVersions2()
  *
  * @package AccountsClient\Responses\Model\Mining\Timeline\UserFeed
  * @author Rakita Miljan <miljan@flocksocial.io>
@@ -32,6 +33,7 @@ class Item extends LazyJsonMapper
         'code' => 'string',
         'original_width' => 'int',
         'original_height' => 'int',
-        'user' => 'User'
+        'user' => 'User',
+        'image_versions2' => 'ImageVersion'
     ];
 }

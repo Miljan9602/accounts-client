@@ -1,8 +1,8 @@
 <?php
 
-namespace AccountsClient\Responses;
+namespace Miljan9602\AccountsClient\Responses;
 
-use AccountsClient\Responses\Model\Mining\Timeline\UserFeed\Item;
+use Miljan9602\AccountsClient\Responses\Model\Mining\Timeline\UserFeed\Item;
 
 /**
  * Class UserFeedResponse

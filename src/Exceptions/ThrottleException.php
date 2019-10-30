@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AccountsClient\Exceptions;
+namespace Miljan9602\AccountsClient\Exceptions;
 
 
 class ThrottleException extends AccountsException

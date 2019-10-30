@@ -1,9 +1,11 @@
 <?php
 
-namespace AccountsClient;
+namespace Miljan9602\AccountsClient;
 
-use AccountsClient\Miners\Requests\PeopleRequests;
-use AccountsClient\Requests\Miners\TimelineRequests;
+use Miljan9602\AccountsClient\Miners\Requests\PeopleRequests;
+use Miljan9602\AccountsClient\Requests\Miners\HashtagRequests;
+use Miljan9602\AccountsClient\Requests\Miners\LocationRequests;
+use Miljan9602\AccountsClient\Requests\Miners\PostRequests;
 
 class Client
 {
@@ -30,9 +32,19 @@ class Client
     private $people;
 
     /**
-     * @var TimelineRequests
+     * @var HashtagRequests
      */
-    private $timeline;
+    private $hashtags;
+
+    /**
+     * @var LocationRequests
+     */
+    private $locations;
+
+    /**
+     * @var PostRequests
+     */
+    private $post;
 
     /**
      * Client constructor. Creates new client instance and init default options.
@@ -48,8 +60,9 @@ class Client
     private function init()
     {
         $this->people = new PeopleRequests($this);
-        $this->timeline = new TimelineRequests($this);
-        $this->timeline = new TimelineRequests($this);
+        $this->hashtags = new HashtagRequests($this);
+        $this->locations = new LocationRequests($this);
+        $this->post = new PostRequests($this);
         $this->verifySSL = true;
         $this->proxy = null;
         $this->retry = [];
@@ -115,19 +128,35 @@ class Client
     }
 
     /**
-     * @return TimelineRequests
-     */
-    public function getTimeline()
-    {
-        return $this->timeline;
-    }
-
-    /**
      * @return PeopleRequests
      */
     public function getPeople()
     {
         return $this->people;
+    }
+
+    /**
+     * @return HashtagRequests
+     */
+    public function getHashtags()
+    {
+        return $this->hashtags;
+    }
+
+    /**
+     * @return LocationRequests
+     */
+    public function getLocations()
+    {
+        return $this->locations;
+    }
+
+    /**
+     * @return PostRequests
+     */
+    public function getPost()
+    {
+        return $this->post;
     }
 
 }

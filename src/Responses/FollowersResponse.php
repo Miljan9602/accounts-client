@@ -1,9 +1,9 @@
 <?php
 
 
-namespace AccountsClient\Responses;
+namespace Miljan9602\AccountsClient\Responses;
 
-use AccountsClient\Responses\Model\Mining\Followers\User;
+use Miljan9602\AccountsClient\Responses\Model\Mining\Followers\User;
 
 /**
  * Class FollowersResponse

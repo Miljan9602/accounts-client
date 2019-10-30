@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AccountsClient\Responses\Model\Mining\Followings;
+namespace Miljan9602\AccountsClient\Responses\Model\Mining\Followings;
 
 use LazyJsonMapper\LazyJsonMapper;
 

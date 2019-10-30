@@ -1,12 +1,12 @@
 <?php
 
-namespace AccountsClient\Requests;
+namespace Miljan9602\AccountsClient\Requests;
 
-use AccountsClient\Client;
-use AccountsClient\Exceptions\AccountsException;
-use AccountsClient\Exceptions\BadRequestException;
-use AccountsClient\Exceptions\NotFoundException;
-use AccountsClient\Exceptions\ThrottleException;
+use Miljan9602\AccountsClient\Client;
+use Miljan9602\AccountsClient\Exceptions\AccountsException;
+use Miljan9602\AccountsClient\Exceptions\BadRequestException;
+use Miljan9602\AccountsClient\Exceptions\NotFoundException;
+use Miljan9602\AccountsClient\Exceptions\ThrottleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
@@ -43,7 +43,6 @@ abstract class BaseRequest implements BaseRequestInterface
 
     public function sendRequest(RequestInterface $request)
     {
-
         $url = $request->getFullRoute();
 
         if (!empty($request->getPayload())) {
@@ -72,7 +71,14 @@ abstract class BaseRequest implements BaseRequestInterface
                     $e = new AccountsException('Accounts 500 status code error.', 500);
                     break;
                 default:
-                    $e = $this->throwNonDefaultExceptions($e->getRequest(), $e->getResponse());
+
+                    if ($e->getRequest() && $e->getResponse()) {
+                        $e = $this->throwNonDefaultExceptions($e->getRequest(), $e->getResponse());
+                    }
+            }
+
+            if (!($e instanceof AccountsException)) {
+                $e = new AccountsException($e->getMessage(), $e->getCode());
             }
 
             throw $e;
@@ -153,7 +159,8 @@ abstract class BaseRequest implements BaseRequestInterface
 
         return function ($retries, \GuzzleHttp\Psr7\Request $request, Response $response = null, RequestException $exception = null) use ($array) {
 
-            if (!$response->getStatusCode()) {
+
+            if (!$response || !$response->getStatusCode()) {
                 return false;
             }
 

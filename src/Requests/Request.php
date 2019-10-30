@@ -1,11 +1,11 @@
 <?php
 
-namespace AccountsClient\Requests;
+namespace Miljan9602\AccountsClient\Requests;
 
-use AccountsClient\Exceptions\AccountsException;
-use AccountsClient\Exceptions\BadRequestException;
-use AccountsClient\Exceptions\EmptyResponseException;
-use AccountsClient\Responses\Response;
+use Miljan9602\AccountsClient\Exceptions\AccountsException;
+use Miljan9602\AccountsClient\Exceptions\BadRequestException;
+use Miljan9602\AccountsClient\Exceptions\EmptyResponseException;
+use Miljan9602\AccountsClient\Responses\Response;
 use LazyJsonMapper\Exception\LazyJsonMapperException;
 use Psr\Http\Message\ResponseInterface;
 

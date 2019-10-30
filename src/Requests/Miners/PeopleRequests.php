@@ -1,10 +1,12 @@
 <?php
 
-namespace AccountsClient\Miners\Requests;
+namespace Miljan9602\AccountsClient\Miners\Requests;
 
-use AccountsClient\Requests\BaseRequest;
-use AccountsClient\Responses\FollowersResponse;
-use AccountsClient\Responses\UserInfoResponse;
+use Miljan9602\AccountsClient\Requests\BaseRequest;
+use Miljan9602\AccountsClient\Responses\FollowersResponse;
+use Miljan9602\AccountsClient\Responses\FollowingsResponse;
+use Miljan9602\AccountsClient\Responses\UserFeedResponse;
+use Miljan9602\AccountsClient\Responses\UserInfoResponse;
 
 class PeopleRequests extends BaseRequest
 {
@@ -22,21 +24,37 @@ class PeopleRequests extends BaseRequest
             ->getResponse(new FollowersResponse());
     }
 
-      /*
-      public function getFollowings($pk, $rankToken, $nextQuery = null) {
-          return $this->request("/api/v1/accounts/requests/friendships/$pk/followings")
-              ->addParam('rank_token', $rankToken)
-              ->addParam('max_id', $nextQuery)
-              ->getResponse(new FollowingsResponse());
-      }
-      */
+    /**
+     * @param $pk
+     * @param $rankToken
+     * @param null $nextQuery
+     * @return \Miljan9602\AccountsClient\Responses\FollowingsResponse
+     */
+    public function getFollowings($pk, $rankToken, $nextQuery = null) {
+        return $this->request("/api/v1/accounts/requests/friendships/$pk/following")
+            ->addParam('rank_token', $rankToken)
+            ->addParam('max_id', $nextQuery)
+            ->getResponse(new FollowingsResponse());
+    }
+
+    /**
+     * @param string $pk
+     * @return \AccountsClient\Responses\UserInfoResponse
+     */
+    public function getInfo(string $pk) {
+        return $this->request("/api/v1/accounts/requests/users/$pk/info")
+            ->getResponse(new UserInfoResponse());
+    }
 
     /**
      * @param $pk
-     * @return \AccountsClient\Responses\UserInfoResponse
+     * @param null $nextQuery
+     * @return \AccountsClient\Responses\UserFeedResponse
      */
-    public function getInfo($pk) {
-        return $this->request("/api/v1/accounts/requests/users/$pk/info")
-            ->getResponse(new UserInfoResponse());
+    public function getUserFeed($pk, $nextQuery = null) {
+
+        return $this->request("/api/v1/accounts/requests/feed/user/$pk")
+            ->addParam('max_id', $nextQuery)
+            ->getResponse(new UserFeedResponse());
     }
 }

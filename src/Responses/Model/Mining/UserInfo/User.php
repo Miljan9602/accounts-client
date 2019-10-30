@@ -1,6 +1,6 @@
 <?php
 
-namespace AccountsClient\Responses\Model\Mining\UserInfo;
+namespace Miljan9602\AccountsClient\Responses\Model\Mining\UserInfo;
 
 use LazyJsonMapper\LazyJsonMapper;
 

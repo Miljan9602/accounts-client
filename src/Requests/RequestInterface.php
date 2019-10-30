@@ -1,10 +1,10 @@
 <?php
 
 
-namespace AccountsClient\Requests;
+namespace Miljan9602\AccountsClient\Requests;
 
-use AccountsClient\Exceptions\AccountsException;
-use AccountsClient\Responses\Response;
+use Miljan9602\AccountsClient\Exceptions\AccountsException;
+use Miljan9602\AccountsClient\Responses\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**

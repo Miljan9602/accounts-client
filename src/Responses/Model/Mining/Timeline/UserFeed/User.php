@@ -1,6 +1,6 @@
 <?php
 
-namespace AccountsClient\Responses\Model\Mining\Timeline\UserFeed;
+namespace Miljan9602\AccountsClient\Responses\Model\Mining\Timeline\UserFeed;
 
 use LazyJsonMapper\LazyJsonMapper;
 

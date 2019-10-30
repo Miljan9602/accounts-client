@@ -17,7 +17,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "AccountsClient\\": "src/"
+      "Miljan9602\\AccountsClient\\": "src/"
     }
   },
   "minimum-stability": "dev",

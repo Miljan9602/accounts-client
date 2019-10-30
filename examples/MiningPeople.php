@@ -5,9 +5,7 @@ date_default_timezone_set('UTC');
 require_once ('../vendor/autoload.php');
 require_once ('../src/Requests/Miners/PeopleRequests.php');
 
-$client = (new \AccountsClient\Client())
-    ->setProxy("http://127.0.0.1:8030")
-    ->setVerifySsl(false)
+$client = (new \Miljan9602\AccountsClient\Client())
     ->setRetry(429, 5)
     ->setRetry(502, 10)
     ->setRetry(400, 5);
@@ -28,28 +26,149 @@ try{
         print_r($result->getFollowers());
 
     }while(true);
+}catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
+    echo $e->getMessage();
+}
+*/
+
+/*
+try{
+    $rankToken = generateUUID();
+    $next_max_id = null;
+    do {
+
+        $result = $client->getPeople()->getFollowings("4633196807", "420d7462-b4bb-4d7d-b627-12116fc6f589", 50);
+
+        $next_max_id = $result->getNextMaxId();
+        print_r($result->getFollowings());
+
+    }while(true);
+}catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
+    echo $e->getMessage();
+}
+*/
+
+/*
+try{
+    $next_max_id = null;
+    $hasMore = true;
+    do {
+        $result = $client->getPeople()->getUserFeed("2128436070", $next_max_id);
+
+        if ($result instanceof \Miljan9602\AccountsClient\Responses\UserFeedResponse) {}
+
+        $next_max_id = $result->getNextMaxId();
+        $hasMore = $result->isMoreAvailable();
+
+        $posts = $result->getItems();
+
+        foreach ($posts as $post) {
+            $candidates = $post->getImageVersions2()->getCandidates();
+
+            foreach ($candidates as $candidate) {
+                echo $candidate->getUrl().PHP_EOL;
+                print_r($candidate->getEstimatedScansSizes());
+            }
+        }
+
+        //print_r($result->getItems());
+
+    }while($hasMore);
+}catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
+    echo $e->getMessage();
+}
+*/
+
+/*
+try{
+    $result = $client->getHashtags()->search("Bel");
+
+    echo $result->getRankToken() ? $result->getRankToken() : "NEMA";
+
+    $result = $client->getHashtags()->search("New", $result->getRankToken());
+}catch (\AccountsClient\Exceptions\AccountsException $e) {
+    echo get_class($e).PHP_EOL;
+    echo $e->getMessage().PHP_EOL;
+}*/
+
+/*
+try{
+    $uuid = generateUUID();
+    $uuid = "fa9ba18a-f99e-11e9-9631-38f9d3536299";
+    $result = $client->getHashtags()->feed("belgrade", $uuid, "QVFBazQ2NGNFOU1TaFprUC1aRG5CcWR6OGdyeUg4eDN3eGNfdVhzTkI3S1FLNTUtT3lHMURIck5lOW5vbi1xaXl2QlBva1g2eW40aERCeVo3MzhRYVlIYg==");
+    $result = $client->getHashtags()->feed("belgrade", $uuid, $result->getNextMaxId());
+    echo print_r($result);
+
+}catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
+    echo $e->getMessage();
+}
+*/
+
+/*
+try{
+    $related = $client->getHashtags()->related("belgrade");
+
+    echo sizeof($related->getRelated());
 }catch (\AccountsClient\Exceptions\AccountsException $e) {
     echo $e->getMessage();
 }
 */
 
+/*
 try{
-    $next_max_id = null;
-    $hasMore = true;
-    do {
-        $result = $client->getTimeline()->getUserFeed("2128436070", $next_max_id);
-
-        $next_max_id = $result->getNextMaxId();
-        $hasMore = $result->isMoreAvailable();
-
-        print_r($result->getItems());
-
-    }while($hasMore);
+    $location = $client->getLocations()->search('1', '1', 'belgr');
 }catch (\AccountsClient\Exceptions\AccountsException $e) {
+    echo $e->getMessage();
+}
+*/
+
+
+try{
+    $uuid = generateUUID();
+    $result = $client->getLocations()->feed("109920975697736", $uuid);
+    $result = $client->getLocations()->feed("109920975697736", $uuid, "ranked", $result->getNextPage(), $result->getNextMaxId(), $result->getNextMediaIds());
+
+    print_r($result->asArray());
+
+}catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
     echo $e->getMessage();
 }
 
 
+/*
+ * Post comments
+$uuid = generateUUID();
+$next_max_id = null;
+do {
+    $mediaId = "1844939649961939969_50417061";
+    $result = $client->getPost()->getPostCommenters($mediaId, $next_max_id);
+
+    $commenters = $result->getComments();
+
+    echo "Comments in batch: ".$result->getCommentCount().PHP_EOL;
+
+    foreach ($commenters as $comment) {
+        echo $comment->getUser()->getPk().PHP_EOL;
+    }
+
+    $next_max_id = $result->getNextMaxId();
+
+    echo $next_max_id;
+
+}while(true);
+*/
+
+/*
+$mediaId = "1844939649961939969_50417061";
+$result = $client->getPost()->getPostLikers($mediaId);
+
+$likers = $result->getUsers();
+echo "Total number of likers: ".$result->getUserCount().PHP_EOL;
+echo "Batch number of oikers: ".sizeof($likers).PHP_EOL;
+foreach ($likers as $liker) {
+    echo $liker->getPk().PHP_EOL;
+}
+*/
 
 function generateUUID(
     $keepDashes = true)

@@ -1,6 +1,6 @@
 <?php
 
-namespace AccountsClient\Responses;
+namespace Miljan9602\AccountsClient\Responses;
 
 use LazyJsonMapper\LazyJsonMapper;
 use Psr\Http\Message\ResponseInterface;
