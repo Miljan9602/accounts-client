@@ -72,13 +72,9 @@ abstract class BaseRequest implements BaseRequestInterface
                     break;
                 default:
 
-                    if ($e->getRequest() && $e->getResponse()) {
-                        $e = $this->throwNonDefaultExceptions($e->getRequest(), $e->getResponse());
+                    if ($e->getRequest() && $e->getResponse() && $error = $this->throwNonDefaultExceptions($e->getRequest(), $e->getResponse())) {
+                        $e = $error;
                     }
-            }
-
-            if (!($e instanceof AccountsException)) {
-                $e = new AccountsException($e->getMessage(), $e->getCode());
             }
 
             throw $e;
