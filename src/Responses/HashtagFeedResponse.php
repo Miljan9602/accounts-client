@@ -4,6 +4,7 @@
 namespace Miljan9602\AccountsClient\Responses;
 
 use Miljan9602\AccountsClient\Responses\Model\Mining\Hashtag\HashtagFeed\Item;
+use Miljan9602\AccountsClient\Responses\Model\Mining\Hashtag\HashtagFeed\Section;
 
 /**
  * Class HashtagFeedResponse
@@ -11,8 +12,8 @@ use Miljan9602\AccountsClient\Responses\Model\Mining\Hashtag\HashtagFeed\Item;
  * @method bool isMoreAvailable()
  * @method string getNextMaxId()
  * @method int getNumResults()
- * @method Item[] getItems()
- * @method Item[] getRankedItems()
+ * @method int[] getNextMediaIds()
+ * @method Section[] getSections()
  *
  * @package AccountsClient\Responses
  * @author Rakita Miljan <miljan@flocksocial.io>
@@ -23,7 +24,7 @@ class HashtagFeedResponse extends Response
         'more_available' => 'bool',
         'next_max_id' => 'string',
         'num_results' => 'int',
-        'items' => 'Model\Mining\Hashtag\HashtagFeed\Item[]',
-        'ranked_items' => 'Model\Mining\Hashtag\HashtagFeed\Item[]'
+        'next_media_ids' => 'int[]',
+        'sections' => 'Model\Mining\Hashtag\HashtagFeed\Section[]',
     ];
 }

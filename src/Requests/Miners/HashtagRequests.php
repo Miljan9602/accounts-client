@@ -29,7 +29,7 @@ class HashtagRequests extends BaseRequest
      * @param null $maxId
      * @return \AccountsClient\Responses\HashtagFeedResponse
      */
-    public function feed($hashtag, $rankToken, $maxId = null)
+    public function feed($hashtag, $rankToken, $maxId = null, $next_media_ids = [])
     {
 
         $request = $this->request("/api/v1/accounts/requests/feed/tag/$hashtag")
@@ -37,6 +37,19 @@ class HashtagRequests extends BaseRequest
 
         if ($maxId) {
             $request = $request->addParam('max_id', $maxId);
+        }
+
+        if ($next_media_ids != null && !empty($next_media_ids)) {
+
+            $ids = [];
+
+            foreach ($next_media_ids as $id) {
+                array_push($ids, intval($id));
+            }
+
+            $request = $request->addParam('variables', urlencode(json_encode([
+                'next_media_ids' => $ids
+            ])));
         }
 
         return $request->getResponse(new HashtagFeedResponse());

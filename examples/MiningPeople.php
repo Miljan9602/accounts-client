@@ -32,20 +32,43 @@ try{
 */
 
 /*
+$pks = [];
 try{
     $rankToken = generateUUID();
-    $next_max_id = null;
+
+    $counter = 0;
+    $hasMore = true;
+
+    $next_max_id = 50;
     do {
 
-        $result = $client->getPeople()->getFollowings("4633196807", "420d7462-b4bb-4d7d-b627-12116fc6f589", 50);
+        $result = $client->getPeople()->getFollowings("1427557192", "420d7462-b4bb-4d7d-b627-12116fc6f589", $next_max_id);
+
+        $followings = $result->getFollowings();
+
+        foreach ($followings as $following) {
+
+            if (!in_array($following->getPk(), $pks)) {
+                array_push($pks, $following->getPk());
+            }
+
+        }
+
+        $counter++;
+
+        if ($counter > 10) {
+            $hasMore = false;
+        }
 
         $next_max_id = $result->getNextMaxId();
-        print_r($result->getFollowings());
 
-    }while(true);
+        //print_r($result->getFollowings());
+
+    }while($hasMore);
 }catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
     echo $e->getMessage();
 }
+print_r($pks);
 */
 
 /*
@@ -94,10 +117,41 @@ try{
 /*
 try{
     $uuid = generateUUID();
-    $uuid = "fa9ba18a-f99e-11e9-9631-38f9d3536299";
-    $result = $client->getHashtags()->feed("belgrade", $uuid, "QVFBazQ2NGNFOU1TaFprUC1aRG5CcWR6OGdyeUg4eDN3eGNfdVhzTkI3S1FLNTUtT3lHMURIck5lOW5vbi1xaXl2QlBva1g2eW40aERCeVo3MzhRYVlIYg==");
-    $result = $client->getHashtags()->feed("belgrade", $uuid, $result->getNextMaxId());
-    echo print_r($result);
+
+
+    $maxId = null;
+    $nextMediaIds = [];
+
+    $persons = [];
+
+    do{
+
+        $result = $client->getHashtags()->feed("belgrade", $uuid, $maxId, $nextMediaIds);
+
+        $maxId = $result->getNextMaxId();
+        $nextMediaIds = $result->getNextMediaIds();
+
+        $sections = $result->getSections();
+
+        foreach ($sections as $section) {
+
+            $items = $section->getLayoutContent()->getFillItems();
+
+            if ($items == null) {
+                $items = $section->getLayoutContent()->getMedias();
+            }
+
+            if ($items == null || empty($items)) { continue; }
+
+            foreach ($items as $item) {
+
+                $user = $item->getMedia()->getUser();
+
+                if (!in_array($user->getUsername(), $persons)) array_push($persons, $user->getUsername());
+            }
+        }
+
+    }while($result->isMoreAvailable());
 
 }catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
     echo $e->getMessage();
@@ -123,6 +177,7 @@ try{
 */
 
 
+/*
 try{
     $uuid = generateUUID();
     $result = $client->getLocations()->feed("109920975697736", $uuid);
@@ -133,7 +188,7 @@ try{
 }catch (\Miljan9602\AccountsClient\Exceptions\AccountsException $e) {
     echo $e->getMessage();
 }
-
+*/
 
 /*
  * Post comments

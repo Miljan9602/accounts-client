@@ -63,6 +63,7 @@ class Request implements RequestInterface
         $this->request = $request;
         $this->route = $route;
         $this->baseUrl = "https://api.accounts.flocksocial.io";
+
     }
 
     public function addParam($key, $value)
