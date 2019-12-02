@@ -54,21 +54,42 @@ abstract class BaseRequest implements BaseRequestInterface
 
         } catch (RequestException $e) {
 
+            $message = $e->getMessage();
+
             switch ($e->getCode()) {
                 case 400:
-                    $e = new BadRequestException('Invalid request options.', 400);
+
+                    if (!$message || $message == ""){
+                        $message = "Invalid request options.";
+                    }
+                    $e = new BadRequestException($message, 400);
                     break;
 
                 case 404:
-                    $e = new NotFoundException('Requested resource does not exist.', 404);
+
+                    if (!$message || $message == ""){
+                        $message = "Requested resource does not exist.";
+                    }
+
+                    $e = new NotFoundException($message, 404);
                     break;
 
                 case 429:
-                    $e = new ThrottleException('You have sent too many requests, please try again later.', 429);
+
+                    if (!$message || $message == ""){
+                        $message = "You have sent too many requests, please try again later.";
+                    }
+
+                    $e = new ThrottleException($message, 429);
                     break;
 
                 case 500:
-                    $e = new AccountsException('Accounts 500 status code error.', 500);
+
+                    if (!$message || $message == ""){
+                        $message = "Accounts 500 status code error.";
+                    }
+
+                    $e = new AccountsException($message, 500);
                     break;
                 default:
 
