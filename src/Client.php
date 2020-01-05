@@ -3,6 +3,7 @@
 namespace Miljan9602\AccountsClient;
 
 use Miljan9602\AccountsClient\Miners\Requests\PeopleRequests;
+use Miljan9602\AccountsClient\Requests\Information\InformationRequests;
 use Miljan9602\AccountsClient\Requests\Miners\HashtagRequests;
 use Miljan9602\AccountsClient\Requests\Miners\LocationRequests;
 use Miljan9602\AccountsClient\Requests\Miners\PostRequests;
@@ -47,6 +48,11 @@ class Client
     private $post;
 
     /**
+     * @var InformationRequests
+     */
+    private $informationRequests;
+
+    /**
      * Client constructor. Creates new client instance and init default options.
      */
     public function __construct()
@@ -63,6 +69,7 @@ class Client
         $this->hashtags = new HashtagRequests($this);
         $this->locations = new LocationRequests($this);
         $this->post = new PostRequests($this);
+        $this->informationRequests = new InformationRequests($this);
         $this->verifySSL = true;
         $this->proxy = null;
         $this->retry = [];
@@ -159,4 +166,11 @@ class Client
         return $this->post;
     }
 
+    /**
+     * @return InformationRequests
+     */
+    public function getInformationRequests()
+    {
+        return $this->informationRequests;
+    }
 }

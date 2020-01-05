@@ -225,6 +225,11 @@ foreach ($likers as $liker) {
 }
 */
 
+/*
+$response = $client->getInformationRequests()->friendship("6756801654", "2128436070");
+print_r($response->asArray());
+*/
+
 function generateUUID(
     $keepDashes = true)
 {

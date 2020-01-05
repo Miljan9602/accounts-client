@@ -16,7 +16,6 @@ class HashtagRequests extends BaseRequest
      */
     public function search($query, $rankToken = null, $count = 30)
     {
-
        return $this->request("/api/v1/accounts/requests/tags/search")
             ->addParam('query', $query)
             ->addParam('rank_token', $rankToken)
